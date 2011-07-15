@@ -28,4 +28,6 @@ probably one of the least HTTP retarded ruby rack server out there.
   s.executables        = %w(kirk)
   s.default_executable = "kirk"
   s.require_paths      = ["lib"]
+
+  s.add_dependency( 'rack',        '~> 1.3.0' )
 end
