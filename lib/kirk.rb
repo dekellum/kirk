@@ -9,6 +9,7 @@ module Kirk
 
   require 'java'
   require 'kirk/version'
+  require 'rjack-slf4j'
 
   autoload :Client, 'kirk/client'
   autoload :Jetty,  'kirk/jetty'
@@ -24,32 +25,12 @@ module Kirk
   java_import "java.util.concurrent.TimeUnit"
   java_import "java.util.concurrent.ThreadPoolExecutor"
 
-  java_import "java.util.logging.Logger"
-  java_import "java.util.logging.Level"
-  java_import "java.util.logging.ConsoleHandler"
-
   def self.sub_process?
     !!defined?(Kirk::PARENT_VERSION)
   end
 
-  # Configure the logger
   def self.logger
-    @logger ||= begin
-      logger = Logger.get_logger("org.eclipse.jetty.util.log")
-
-      unless sub_process?
-        logger.set_use_parent_handlers(false)
-        logger.add_handler logger_handler
-      end
-
-      logger
-    end
+    @logger ||= RJack::SLF4J[ Kirk ]
   end
 
-  def self.logger_handler
-    ConsoleHandler.new.tap do |handler|
-      handler.set_output_stream(java::lang::System.out)
-      handler.set_formatter(Native::LogFormatter.new)
-    end
-  end
 end

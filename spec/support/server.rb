@@ -11,13 +11,11 @@ module SpecHelpers
 
     if app.respond_to?(:call)
 
-      @server = Kirk::Server.start(app, :log_level => :warning)
+      @server = Kirk::Server.start(app)
 
     else
 
       blk ||= lambda do
-        log :level => :warning
-
         rack app do
           env :BUNDLE_BIN_PATH => nil, :BUNDLE_GEMFILE => nil
         end

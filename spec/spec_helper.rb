@@ -1,4 +1,10 @@
 $:.unshift File.expand_path('../../build', __FILE__)
+
+# Setup logging
+require 'rjack-logback'
+RJack::Logback.config_console( :stderr => true,
+                               :level => ( ENV['DEBUG_LOG'] ? :debug : :warn ) )
+
 require 'kirk'
 require 'fileutils'
 require 'openssl'

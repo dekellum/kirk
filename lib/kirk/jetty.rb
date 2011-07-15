@@ -1,5 +1,6 @@
 # Only require jars if in the "master" process
 unless Kirk.sub_process?
+  require 'rjack-slf4j'
   require 'rjack-jetty'
   require 'rjack-jetty/client'
 end
@@ -20,9 +21,5 @@ module Kirk
     java_import "org.eclipse.jetty.server.Server"
 
     java_import "org.eclipse.jetty.util.component.LifeCycle"
-    java_import "org.eclipse.jetty.util.log.Log"
-    java_import "org.eclipse.jetty.util.log.JavaUtilLog"
-
-    Log.set_log Jetty::JavaUtilLog.new unless Kirk.sub_process?
   end
 end

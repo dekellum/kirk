@@ -1,3 +1,11 @@
 #!/usr/bin/env ruby
+
+begin
+  require 'rjack-logback'
+  RJack::Logback.config_console( :stderr => true, :thread => true )
+rescue LoadError => e
+  require 'rjack-slf4j/simple'
+end
+
 require 'kirk/cli'
 Kirk::CLI.start(ARGV)

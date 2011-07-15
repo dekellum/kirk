@@ -31,4 +31,7 @@ probably one of the least HTTP retarded ruby rack server out there.
 
   s.add_dependency( 'rack',        '~> 1.3.0' )
   s.add_dependency( 'rjack-jetty', '~> 7.4'   )
+  s.add_dependency( 'rjack-slf4j', '~> 1.6.1' )
+
+  s.add_development_dependency( 'rjack-logback', '~> 1.1' )
 end
