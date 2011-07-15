@@ -1,10 +1,7 @@
 # Only require jars if in the "master" process
 unless Kirk.sub_process?
-  require "kirk/jetty/servlet-api-2.5"
-
-  %w(util http io continuation server client).each do |mod|
-    require "kirk/jetty/jetty-#{mod}-7.4.2.v20110526"
-  end
+  require 'rjack-jetty'
+  require 'rjack-jetty/client'
 end
 
 module Kirk
